@@ -7,7 +7,7 @@
 <title>Michelle Amy Photography</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -37,11 +37,13 @@
   h1 {
     margin: 0;
     flex: 0 0 auto;
-    font-family: "Great Vibes", "Snell Roundhand", "Segoe Script", "Brush Script MT", cursive;
-    font-size: clamp(2.2rem, 12vw, 3.6rem);
-    font-weight: 400;
+    font-family: "Dancing Script", "Snell Roundhand", "Segoe Script", "Brush Script MT", cursive;
+    font-size: 8vw; /* starting size, refined by the script below */
+    font-weight: 600;
     text-align: center;
-    line-height: 1.1;
+    line-height: 1.15;
+    white-space: nowrap;
+    width: 100%;
   }
   .url {
     margin: 0;
@@ -69,13 +71,30 @@
 </style>
 </head>
 <body>
-  <h1>Michelle Amy Photography</h1>
+  <h1 id="title">Michelle Amy Photography</h1>
   <div class="qr-wrap">
     <img src="qr.png" alt="QR code for Michelle Amy Photography">
   </div>
   <p class="url">spengeman.com/map_qr</p>
 
 <script>
+  // Scales the heading so it always fits on one line.
+  function fitTitle() {
+    var h = document.getElementById('title');
+    h.style.fontSize = '100px';
+    h.style.width = 'auto';
+    var natural = h.scrollWidth;
+    var avail = h.parentElement.clientWidth
+      - parseFloat(getComputedStyle(h.parentElement).paddingLeft)
+      - parseFloat(getComputedStyle(h.parentElement).paddingRight);
+    h.style.width = '100%';
+    h.style.fontSize = Math.min(100 * avail / natural, 64) + 'px';
+  }
+  fitTitle();
+  window.addEventListener('resize', fitTitle);
+  window.addEventListener('orientationchange', fitTitle);
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(fitTitle); }
+
   // Keeps the screen from dimming or locking while this page is open.
   // Note: web pages cannot change screen brightness. This only prevents auto-dim.
   let lock = null;
