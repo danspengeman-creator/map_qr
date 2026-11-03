@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>Michelle Amy Photography</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: #ffffff;
+    color: #111111;
+  }
+  body {
+    box-sizing: border-box;
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    /* border on all sides, respecting notches and home bar */
+    padding:
+      max(24px, env(safe-area-inset-top))
+      max(24px, env(safe-area-inset-right))
+      max(24px, env(safe-area-inset-bottom))
+      max(24px, env(safe-area-inset-left));
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  h1 {
+    margin: 0;
+    flex: 0 0 auto;
+    font-size: clamp(1.4rem, 7vw, 2.2rem);
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.15;
+  }
+  .url {
+    margin: 0;
+    flex: 0 0 auto;
+    font-size: clamp(1rem, 5vw, 1.4rem);
+    text-align: center;
+    word-break: break-all;
+  }
+  .qr-wrap {
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .qr-wrap img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+</style>
+</head>
+<body>
+  <h1>Michelle Amy Photography</h1>
+  <div class="qr-wrap">
+    <img src="qr.png" alt="QR code for Michelle Amy Photography">
+  </div>
+  <p class="url">spengeman.com/map_qr</p>
+
+<script>
+  // Keeps the screen from dimming or locking while this page is open.
+  // Note: web pages cannot change screen brightness. This only prevents auto-dim.
+  let lock = null;
+  async function keepAwake() {
+    try {
+      if ('wakeLock' in navigator && document.visibilityState === 'visible') {
+        lock = await navigator.wakeLock.request('screen');
+      }
+    } catch (e) { /* ignore */ }
+  }
+  keepAwake();
+  document.addEventListener('visibilitychange', keepAwake);
+  document.addEventListener('click', keepAwake);
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(function () {});
+  }
+</script>
+</body>
+</html>
