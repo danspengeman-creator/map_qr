@@ -1,5 +1,5 @@
 // Caches the page and QR image so it opens instantly, even with no signal.
-const CACHE = 'ma-qr-v1';
+const CACHE = 'ma-qr-v2';
 const FILES = ['./', './index.html', './qr.png', './icon-192.png', './icon-512.png', './manifest.webmanifest'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
